@@ -18,13 +18,5 @@ body {
 .gridNode {
     border-style: solid;
     user-select: none;
-    border-width: 0.5px;
-}
-
-.nodeFilled {
-    background-color: grey;
-}
-
-.reset {
-
+    border-width: 1px;
 }

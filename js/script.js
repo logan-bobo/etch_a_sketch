@@ -11,6 +11,7 @@ let gridNodeSide = gridWidth / userSelectedWidth - 2;
 
 const container = document.querySelector('.container');
 const resetButton = document.querySelector('.reset');
+const rainbowbutton = document.querySelector('.rainbow')
 
 // tack the state of the mouse click so we can drag and draw
 let mouseDown = false;
@@ -32,18 +33,39 @@ for (let i = 0; i < (userSelectedWidth * userSelectedWidth); i++) {
 function reset () {
     let gridNodes = document.querySelectorAll('.gridNode');
     for (gridNode of gridNodes) {
-        gridNode.classList.remove('nodeFilled');
+        gridNode.style.backgroundColor = "#ffffff";
     }
 }
 
 resetButton.addEventListener('click', reset);
 
+function rainbow () {
+    let valR = Math.floor(Math.random() * 251);
+    let valG = Math.floor(Math.random() * 251);
+    let valB = Math.floor(Math.random() * 251);
+    return `rgb(${valR}, ${valG}, ${valB})`
+}
+
+let rainbowState = false;
+
+function toggleRainbow () {
+    if (rainbowState) {
+        rainbowState = false;
+    } else {
+        rainbowState = true;
+    }
+}
+
+rainbowbutton.addEventListener('click', toggleRainbow);
+
 function fillNode(event) {
     // if the mouse if only hovering over a node do not fill
     if (event.type === 'mouseover' && !mouseDown ) {
         return
+    } if (rainbowState) {
+        event.target.style.backgroundColor = rainbow();
     } else {
         // when the mouse is clicked down or over and down fill node
-        event.target.classList.add('nodeFilled');
+        event.target.style.backgroundColor = "#8f8f8f";
     }
 }
