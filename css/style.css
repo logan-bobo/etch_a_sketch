@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #F0F0F0;
+    color: #F45050;
+    gap: 30px;
+}
+
+.container {
+    color: #3C486B;
+    display: flex;
+    height: 500px;
+    width: 500px;
+    flex-wrap: wrap;
+}
+
+.gridNode {
+    border-style: solid;
+    user-select: none;
+    border-width: 0.5px;
+}
+
+.nodeFilled {
+    background-color: grey;
+}
+
+.reset {
+
+}
