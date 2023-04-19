@@ -58,6 +58,12 @@ function toggleRainbow () {
 
 rainbowbutton.addEventListener('click', toggleRainbow);
 
+function extractR (rgbString) {
+    rawValues = rgbString.slice(4, -1)
+    rgbArray = rawValues.split(", ")
+    return rgbArray[0]
+}
+
 function fillNode(event) {
     // if the mouse if only hovering over a node do not fill
     if (event.type === 'mouseover' && !mouseDown ) {
@@ -66,6 +72,14 @@ function fillNode(event) {
         event.target.style.backgroundColor = rainbow();
     } else {
         // when the mouse is clicked down or over and down fill node
-        event.target.style.backgroundColor = "#8f8f8f";
+        if (!event.target.style.backgroundColor) {
+            event.target.style.backgroundColor = "rgb(200, 200, 200)";
+        } else {
+            // to make the grey darker we do not need the R, G and B values as to turn from white to black you increment
+            // all equally so we take the r and treat it as the base for G and B.
+            currentVal = event.target.style.backgroundColor;
+            r = extractR(currentVal)
+            event.target.style.backgroundColor = `rgb(${r - 20}, ${r - 20}, ${r - 20})`;
+        }
     }
 }
