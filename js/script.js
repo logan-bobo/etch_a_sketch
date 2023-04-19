@@ -1,14 +1,13 @@
-let userSelectedWidth;
-
-while (!userSelectedWidth || userSelectedWidth < 0 || userSelectedWidth > 32) {
-    userSelectedWidth = prompt("Please enter the number of pixels you would like per side between 0 and 32");
-}
-
 const gridWidth = 500;
 const container = document.querySelector('.container');
 const resetButton = document.querySelector('.reset');
 const rainbowbutton = document.querySelector('.rainbow');
 const setGrid = document.querySelector('.setGridSize')
+let userSelectedWidth;
+
+while (!userSelectedWidth || userSelectedWidth < 0 || userSelectedWidth > 32) {
+    userSelectedWidth = prompt("Please enter the number of pixels you would like per side between 0 and 32");
+}
 
 // tack the state of the mouse click so we can drag and draw
 let mouseDown = false;
@@ -49,7 +48,11 @@ function reset () {
 resetButton.addEventListener('click', reset);
 
 function defineGrid () {
-    userSelectedWidth = prompt("Please enter the number of pixels you would like per side between 0 and 32");
+    userSelectedWidth = -1;
+    while (!userSelectedWidth || userSelectedWidth < 0 || userSelectedWidth > 32) {
+        userSelectedWidth = prompt("Please enter the number of pixels you would like per side between 0 and 32");
+    }
+
     drawGrid();
 }
 
@@ -81,7 +84,7 @@ function extractR (rgbString) {
 }
 
 function fillNode(event) {
-    // if the mouse if only hovering over a node do not fill
+    // if the mouse is only hovering over a node do not fill
     if (event.type === 'mouseover' && !mouseDown ) {
         return
     } if (rainbowState) {
