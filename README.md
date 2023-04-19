@@ -1,6 +1,6 @@
 # etch a sketch
 
-Implementation of an etch a sketch implementation in Javascript that has the following functionality:
+Implementation of an etch a sketch in Javascript that has the following functionality:
 - User can define a grid based on width of up to 32 nodes of equal size fitting in a 500px div.
 - Click and drag to fill grid nodes.
 - Add a rainbow mode that will fill a grid with a random color and allow this mode to be toggled.
