@@ -4,30 +4,39 @@ while (!userSelectedWidth || userSelectedWidth < 0 || userSelectedWidth > 32) {
     userSelectedWidth = prompt("Please enter the number of pixels you would like per side between 0 and 32");
 }
 
-let gridWidth = 500;
-
-// - 2 pixels for the border on each div
-let gridNodeSide = gridWidth / userSelectedWidth - 2;
-
+const gridWidth = 500;
 const container = document.querySelector('.container');
 const resetButton = document.querySelector('.reset');
-const rainbowbutton = document.querySelector('.rainbow')
+const rainbowbutton = document.querySelector('.rainbow');
+const setGrid = document.querySelector('.setGridSize')
 
 // tack the state of the mouse click so we can drag and draw
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
-for (let i = 0; i < (userSelectedWidth * userSelectedWidth); i++) {
-    let gridNode = document.createElement('div');
-    gridNode.classList.add('gridNode');
-    gridNode.style.width = `${gridNodeSide}px`;
-    gridNode.style.height = `${gridNodeSide}px`;
-    container.appendChild(gridNode);
+function cleanGrid () {
+    while (container.firstChild) {
+        container.removeChild(container.firstChild)
+    }
+}
 
-    // add event listeners for mouse over and down so we can click and drag to fill nodes
-    gridNode.addEventListener('mouseover', fillNode);
-    gridNode.addEventListener('mousedown', fillNode);
+function drawGrid () {
+    cleanGrid();
+    // - 2 pixels for the border on each div
+    let gridNodeSide = gridWidth / userSelectedWidth - 2;
+
+    for (let i = 0; i < (userSelectedWidth * userSelectedWidth); i++) {
+        let gridNode = document.createElement('div');
+        gridNode.classList.add('gridNode');
+        gridNode.style.width = `${gridNodeSide}px`;
+        gridNode.style.height = `${gridNodeSide}px`;
+        container.appendChild(gridNode);
+
+        // add event listeners for mouse over and down so we can click and drag to fill nodes
+        gridNode.addEventListener('mouseover', fillNode);
+        gridNode.addEventListener('mousedown', fillNode);
+    }
 }
 
 function reset () {
@@ -38,6 +47,13 @@ function reset () {
 }
 
 resetButton.addEventListener('click', reset);
+
+function defineGrid () {
+    userSelectedWidth = prompt("Please enter the number of pixels you would like per side between 0 and 32");
+    drawGrid();
+}
+
+setGrid.addEventListener('click', defineGrid);
 
 function rainbow () {
     let valR = Math.floor(Math.random() * 251);
@@ -83,3 +99,5 @@ function fillNode(event) {
         }
     }
 }
+
+drawGrid();
