@@ -5,6 +5,8 @@ body {
     background-color: #F0F0F0;
     color: #F45050;
     gap: 30px;
+    margin: 0px;
+    min-height: 100vh;
 }
 
 .container {
